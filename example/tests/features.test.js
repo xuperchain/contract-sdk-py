@@ -22,8 +22,3 @@ Test("Log", function (t) {
     var resp = c.Invoke("Log", {});
     assert.equal(resp.Body, "ok")
 })
-
-Test("QueryTx",function(t){
-    var c = deploy()
-    var resp = c.Invoke("QueryTx",{"txid":""})
-})
