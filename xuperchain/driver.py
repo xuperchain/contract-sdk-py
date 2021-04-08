@@ -1,7 +1,7 @@
 import os
 import grpc
 from xuperchain.code_service import NativeCodeServicer
-import  xuperchain.contract_service.contract_service_pb2_grpc as contract_service_pb2_grpc
+import xuperchain.contract_service.contract_service_pb2_grpc as contract_service_pb2_grpc
 import xuperchain.contract_service.contract_service_pb2 as contract_service_pb2
 import threading
 from datetime import datetime
@@ -17,7 +17,8 @@ class Driver():
     def serve(self, contract: any):
         chain_addr = parse.urlparse(os.environ.get("XCHAIN_CHAIN_ADDR"))
         if not chain_addr.scheme == "tcp":
-            raise Exception("bad chain addr scheme {}".format(chain_addr.scheme))
+            raise Exception(
+                "bad chain addr scheme {}".format(chain_addr.scheme))
 
         code_port = os.environ.get("XCHAIN_CODE_PORT")
 
@@ -27,7 +28,8 @@ class Driver():
         self.code_service = code_service
 
         server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-        contract_service_pb2_grpc.add_NativeCodeServicer_to_server(servicer=code_service, server=server)
+        contract_service_pb2_grpc.add_NativeCodeServicer_to_server(
+            servicer=code_service, server=server)
 
         # refrection for grpcurl
         from grpc_reflection.v1alpha import reflection
@@ -43,11 +45,9 @@ class Driver():
         server.wait_for_termination()
 
     def check_health(self):
-        pass
-        # TODO @fengjin
-        # if (datetime.now() - self.code_service.lastPing).total_seconds() > 10:
-        #     raise Exception("loss heartbeat from xchain")
+        if (datetime.now() - self.code_service.lastPing).total_seconds() > 10:
+            raise Exception("loss heartbeat from xchain")
 
-        # timer = threading.Timer(1, self.check_health)
-        # timer.daemon = True
-        # timer.start()
+        timer = threading.Timer(1, self.check_health)
+        timer.daemon = True
+        timer.start()
