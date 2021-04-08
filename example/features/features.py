@@ -28,8 +28,8 @@ class Features():
         blockid = ctx.Args().get("blockid")
         if blockid is None:
             return Response.error("missing blockid")
-        resp = ctx.QueryBlock(blockid=blockid)
-        return Response(200, resp.blockid)
+        block = ctx.QueryBlock(blockid=blockid)
+        return Response.ok(block.pre_hash)
 
 
 if __name__ == "__main__":
