@@ -32,9 +32,9 @@ class Features():
         return Response.ok(block.pre_hash)
 
     @contract_method
-    def Version(self,ctx:Context):
-        # modify this value and upgrade contract for upgradability validate
-        return Response.ok("v1")
+    def Version(self, ctx: Context):
+        return Response.ok("v2")
+
 
 if __name__ == "__main__":
     Driver().serve(Features())
