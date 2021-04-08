@@ -33,7 +33,8 @@ class Features():
 
     @contract_method
     def Version(self,ctx:Context):
-        return Response.ok("v2")
+        # modify this value and upgrade contract for upgradable validate
+        return Response.ok("v1")
 
 if __name__ == "__main__":
     Driver().serve(Features())
