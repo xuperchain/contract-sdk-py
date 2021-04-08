@@ -33,7 +33,7 @@ class Features():
 
     @contract_method
     def Version(self, ctx: Context):
-        # modify this value and upgrade contract for upgradable validate
+        # modify this value and upgrade contract for upgradability validate
         return Response.ok("v1")
 
 
