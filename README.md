@@ -16,7 +16,7 @@ contract-sdk-py 是 [XuperChain](https://github.com/xuperchain/xuperchain) 的�
 2. 部署和调用第一个 python 合约
 
 ``` bash
-    ./xchain-cli native deploy --account XC1111111111111111@xuper --fee 15587517 --runtime py  -a '{"creator":"xchain"}' --cname counter <PATH_TO_CONTRACT_SDK_PY>/contract-sdk-py/example/counter/counter.py 
+    ./xchain-cli native deploy --account XC1111111111111111@xuper --fee 15587517 --runtime py  -a '{"creator":"xchain"}' --cname counter <PATH_TO_CONTRACT_SDK_PY>/example/counter/counter.py 
     ./xchain-cli native invoke --method Increase -a '{"key":"xchain"}' counter --fee 10
     ./xchain-cli native invoke --method  Get -a '{"key":"xchain"}' counter --fee 10
 ``` 
