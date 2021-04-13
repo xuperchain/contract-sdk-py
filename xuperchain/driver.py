@@ -32,12 +32,12 @@ class Driver():
             servicer=code_service, server=server)
 
         # refrection for grpcurl
-        from grpc_reflection.v1alpha import reflection
-        SERVICE_NAMES = (
-            contract_service_pb2.DESCRIPTOR.services_by_name['NativeCode'].full_name,
-            reflection.SERVICE_NAME,
-        )
-        reflection.enable_server_reflection(SERVICE_NAMES, server)
+        # from grpc_reflection.v1alpha import reflection
+        # SERVICE_NAMES = (
+        #     contract_service_pb2.DESCRIPTOR.services_by_name['NativeCode'].full_name,
+        #     reflection.SERVICE_NAME,
+        # )
+        # reflection.enable_server_reflection(SERVICE_NAMES, server)
 
         server.add_insecure_port('[::]:' + code_port)  # ipv4?
         server.start()
