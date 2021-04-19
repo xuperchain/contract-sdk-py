@@ -10,8 +10,8 @@ function deploy() {
         code: codePath,
         lang: lang,
         type: type,
-        init_args: { "creator": "xchain"},
-        options:{"account":"xchain"}
+        init_args: { "creator": "xchain" },
+        options: { "account": "xchain" }
     });
 }
 //
@@ -22,6 +22,12 @@ Test("Increase", function (t) {
     console.log(resp.Message)
     console.log(resp.Body)
     assert.equal(resp.Body, "1");
-    var resp = c.Invoke("Get",{"key":"key"})
-    assert.equal(resp.Body,"1")
+    var resp = c.Invoke("Get", { "key": "key" })
+    assert.equal(resp.Body, "1")
+})
+
+Test("Delete", function (t) {
+    var c = deploy()
+    var resp = c.Invoke("Delete", { "key": "not_exist" })
+
 })

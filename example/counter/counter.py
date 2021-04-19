@@ -35,8 +35,12 @@ class Counter():
         if value is None:
             return Response(status=400,msg="key {} not found".format(key))
         return Response(status=200,body=value)
-
+    
+    @contract_method
+    def Delete(self, ctx: Context):
+        key = ctx.Args().get("key")
+        ctx.DeleteObject(key)
+        return Response(status=200,body="")
 
 if __name__ == "__main__":
-    # 这里传递类还是传递变量?
     Driver().serve(Counter())
