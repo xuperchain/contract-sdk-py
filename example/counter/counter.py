@@ -22,7 +22,6 @@ class Counter():
         try:
             value = str(int(ctx.GetObject(key=key)) + 1)
         except:
-
             value = "1"
 
         ctx.PutObject(key, value=value)
@@ -33,10 +32,15 @@ class Counter():
         key = ctx.Args().get("key")
         value = ctx.GetObject(key)
         if value is None:
-            return Response(status=400,msg="key {} not found".format(key))
-        return Response(status=200,body=value)
+            return Response(status=400, msg="key {} not found".format(key))
+        return Response(status=200, body=value)
+
+    @contract_method
+    def Delete(self, ctx: Context):
+        key = ctx.Args().get("key")
+        ctx.DeleteObject(key)
+        return Response(status=200, body="")
 
 
 if __name__ == "__main__":
-    # 这里传递类还是传递变量?
     Driver().serve(Counter())
