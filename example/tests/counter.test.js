@@ -30,4 +30,16 @@ Test("Delete", function (t) {
     var c = deploy()
     var resp = c.Invoke("Delete", { "key": "not_exist" })
 
+
+    var resp = c.Invoke("Get", { "key": "xchain" })
+    assert.equal(resp.Status, 500)
+
+    c.Invoke("Increase", { "key": "xchain" })
+    resp = c.Invoke("Get", { "key": "xchain" })
+    assert.equal(resp.Status, 200)
+
+    c.Invoke("Delete", { "key": "xchain" })
+    resp = c.Invoke("Get", { "key": "xchain" })
+    assert.equal(resp.Status, 500)
+
 })
