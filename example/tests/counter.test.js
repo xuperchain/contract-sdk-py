@@ -39,5 +39,4 @@ Test("Delete", function (t) {
     c.Invoke("Delete", { "key": "xchain" })
     resp = c.Invoke("Get", { "key": "xchain" })
     assert.equal(resp.Status, 500)
-
 })
