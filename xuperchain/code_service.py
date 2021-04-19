@@ -30,17 +30,19 @@ class NativeCodeServicer(object):
             found = False
 
         if not found:
-            resp = contract_pb2.Response(status=500, message="method {} not found".format(method), body=None)
+            resp = contract_pb2.Response(
+                status=500, message="method {} not found".format(method), body=None)
             ctx.SetOutput(resp)
             return contract_pb2.NativeCallResponse()
         try:
             resp = f(ctx)
             # print(resp.body)
-            resp = contract_pb2.Response(status=resp.status, message=resp.msg, body=resp.body.encode())
+            resp = contract_pb2.Response(
+                status=resp.status, message=resp.msg, body=resp.body.encode())
             ctx.SetOutput(resp)
         except Exception as e:
             status = 500
-            logging.exception(e)
+            # logging.exception(e)
             msg = "method:{},msg:{}".format(method, str(e))
             resp = contract_pb2.Response(status=status, message=msg, body=None)
             ctx.SetOutput(resp)

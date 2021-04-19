@@ -28,8 +28,6 @@ Test("Increase", function (t) {
 
 Test("Delete", function (t) {
     var c = deploy()
-    var resp = c.Invoke("Delete", { "key": "not_exist" })
-
 
     var resp = c.Invoke("Get", { "key": "xchain" })
     assert.equal(resp.Status, 500)
